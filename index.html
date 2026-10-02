@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Санал авах</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2f7, #dfe7f1);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .info {
+      background: #f5f7fa;
+      padding: 18px;
+      border-radius: 12px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #ccd3dc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .choices {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .choice {
+      flex: 1;
+      border: 1px solid #ccd3dc;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #111827;
+      color: white;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Санал авах</h1>
+
+    <div class="info">
+      Энд тухайн хүн унших мэдээлэл байна.
+      <br><br>
+      Жишээ нь ямар нэг санал, дүрэм, шийдвэр эсвэл хүсэлтийн тайлбар энд байна.
+    </div>
+
+    <label>Таны нэр</label>
+    <input type="text" id="name" placeholder="Нэрээ бичнэ үү" />
+
+    <label>Та зөвшөөрч байна уу?</label>
+
+    <div class="choices">
+      <label class="choice">
+        <input type="radio" name="answer" value="YES" />
+        YES
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="answer" value="NO" />
+        NO
+      </label>
+    </div>
+
+    <label>Нэмэлт санал / тайлбар</label>
+    <textarea id="comment" placeholder="Санал байвал энд бичнэ үү"></textarea>
+
+    <button onclick="submitForm()">Илгээх</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById("name").value.trim();
+      const answer = document.querySelector('input[name="answer"]:checked');
+      const comment = document.getElementById("comment").value.trim();
+      const result = document.getElementById("result");
+
+      if (!name) {
+        result.innerText = "Нэрээ оруулна уу.";
+        return;
+      }
+
+      if (!answer) {
+        result.innerText = "YES эсвэл NO сонгоно уу.";
+        return;
+      }
+
+      result.innerText =
+        "Баярлалаа, " +
+        name +
+        ". Таны сонголт: " +
+        answer.value +
+        (comment ? " | Санал: " + comment : "");
+    }
+  </script>
+
+</body>
+</html>
